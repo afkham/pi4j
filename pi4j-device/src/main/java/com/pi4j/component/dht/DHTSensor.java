@@ -24,7 +24,7 @@ public class DHTSensor {
         this.dataPinNumber = dataPinNumber; //TODO
         this.type = type;
         // set up the pins!
-        dataOutPin = gpio.provisionDigitalOutputPin(dataPinNumber, "dhtData", PinState.HIGH);
+        dataOutPin = gpio.provisionDigitalOutputPin(dataPinNumber, "dhtDataOut", PinState.HIGH);
         lastReadTime = 0;
     }
 
@@ -116,7 +116,7 @@ public class DHTSensor {
         data[0] = data[1] = data[2] = data[3] = data[4] = 0;
 
         // now pull it low for ~20 milliseconds
-        dataOutPin = gpio.provisionDigitalOutputPin(dataPinNumber, "dhtData", PinState.HIGH);
+        dataOutPin = gpio.provisionDigitalOutputPin(dataPinNumber, "dhtDataOut", PinState.HIGH);
         dataOutPin.low();
         try {
             Thread.sleep(20);
@@ -128,7 +128,7 @@ public class DHTSensor {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        dataInPin = gpio.provisionDigitalInputPin(dataPinNumber, "dhtData");
+        dataInPin = gpio.provisionDigitalInputPin(dataPinNumber, "dhtDataIn");
 
 
         // read in timings

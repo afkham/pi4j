@@ -502,11 +502,11 @@ public class GpioControllerImpl implements GpioController {
     @Override
     public GpioPin provisionPin(GpioProvider provider, Pin pin, String name, PinMode mode) {
         // if an existing pin has been previously created, then throw an error
-        for(GpioPin p : pins) {
+        /*for(GpioPin p : pins) {
             if (p.getProvider().equals(provider) && p.getPin().equals(pin)) {
                 throw new GpioPinExistsException(pin);
             }
-        }
+        }*/
 
         // create new GPIO pin instance
         GpioPin gpioPin = new GpioPinImpl(this, provider, pin);
