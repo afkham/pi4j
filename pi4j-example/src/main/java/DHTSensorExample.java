@@ -10,10 +10,10 @@ public class DHTSensorExample {
     public static void main(String[] args) {
         System.out.println("<--Pi4J--> DHT11 Sensor Example ... started.");
 
-        DHTSensor dhtSensor = new DHTSensor(RaspiPin.GPIO_01, DHTSensorType.DHT11);
+        DHTSensor dhtSensor = new DHTSensor(24, DHTSensorType.DHT11);
 
         while (true) {
-            float temperature = dhtSensor.readTemperature(TemperatureScale.CELSIUS);
+            float temperature = dhtSensor.readTemperature();
             float humidity = dhtSensor.readHumidity();
 
             System.out.println("temperature = " + temperature);

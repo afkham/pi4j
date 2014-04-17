@@ -28,7 +28,8 @@ SRC	=   com_pi4j_jni_I2C.c            \
         com_pi4j_wiringpi_Nes.c       \
         com_pi4j_wiringpi_GpioPin.c   \
         com_pi4j_wiringpi_GpioUtil.c  \
-        com_pi4j_wiringpi_GpioInterrupt.c
+        com_pi4j_wiringpi_GpioInterrupt.c \
+        com_pi4j_wiringpi_DHTSensor.c
 
 OBJ	=   com_pi4j_jni_I2C.o            \
 	    com_pi4j_jni_Serial.o         \
@@ -43,6 +44,7 @@ OBJ	=   com_pi4j_jni_I2C.o            \
         com_pi4j_wiringpi_GpioPin.o   \
         com_pi4j_wiringpi_GpioUtil.o  \
         com_pi4j_wiringpi_GpioInterrupt.o
+        com_pi4j_wiringpi_DHTSensor.o
 
 all:		$(TARGET)
 
@@ -92,3 +94,4 @@ com_pi4j_wiringpi_SoftPwm.o: com_pi4j_wiringpi_SoftPwm.h
 com_pi4j_wiringpi_Spi.o: com_pi4j_wiringpi_Spi.h
 com_pi4j_wiringpi_Gertboard.o: com_pi4j_wiringpi_Gertboard.h
 com_pi4j_wiringpi_Nes.o: com_pi4j_wiringpi_Nes.h
+com_pi4j_wiringpi_DHTSensor.o: com_pi4j_wiringpi_DHTSensor.h
