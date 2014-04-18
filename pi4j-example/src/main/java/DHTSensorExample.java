@@ -24,10 +24,8 @@
  * limitations under the License.
  * #L%
  */
-import com.pi4j.component.dht.DHTSensor;
-import com.pi4j.component.dht.DHTSensorType;
-import com.pi4j.io.gpio.RaspiPin;
-import com.pi4j.temperature.TemperatureScale;
+
+import com.pi4j.wiringpi.DHTSensor;
 
 /**
  * Created by azeez on 4/17/14.

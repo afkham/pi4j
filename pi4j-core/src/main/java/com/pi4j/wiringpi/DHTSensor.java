@@ -1,10 +1,10 @@
-package com.pi4j.component.dht;
+package com.pi4j.wiringpi;
 
 /*
  * #%L
  * **********************************************************************
  * ORGANIZATION  :  Pi4J
- * PROJECT       :  Pi4J :: Device Abstractions
+ * PROJECT       :  Pi4J :: Java Library (Core)
  * FILENAME      :  DHTSensor.java  
  * 
  * This file is part of the Pi4J project. More information about 
@@ -37,7 +37,7 @@ import com.pi4j.util.NativeLibraryLoader;
 public class DHTSensor {
 
     private int dataPinNumber;
-    private DHTSensorType type;
+//    private DHTSensorType type;
 
     static {
         // Load the platform library

@@ -30,7 +30,7 @@
 
 int readDHT(int type, int pin);
 
-JNIEXPORT jint JNICALL Java_com_pi4j_component_dht_DHTSensor_readSensor
+JNIEXPORT jint JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
   (JNIEnv *env, jclass class, jint sensorType, jint dataPinNumber)
 {
      if (!bcm2835_init())
