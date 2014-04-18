@@ -43,7 +43,7 @@ OBJ	=   com_pi4j_jni_I2C.o            \
         com_pi4j_wiringpi_Nes.o       \
         com_pi4j_wiringpi_GpioPin.o   \
         com_pi4j_wiringpi_GpioUtil.o  \
-        com_pi4j_wiringpi_GpioInterrupt.o
+        com_pi4j_wiringpi_GpioInterrupt.o \
         com_pi4j_wiringpi_DHTSensor.o
 
 all:		$(TARGET)

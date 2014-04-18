@@ -29,6 +29,8 @@ package com.pi4j.component.dht;
 
 //import com.pi4j.temperature.TemperatureScale;
 
+import com.pi4j.util.NativeLibraryLoader;
+
 /**
  * Created by azeez on 4/17/14.
  */
@@ -38,7 +40,8 @@ public class DHTSensor {
     private DHTSensorType type;
 
     static {
-        System.loadLibrary("dhtsensor");
+        // Load the platform library
+        NativeLibraryLoader.load("pi4j", "libpi4j.so");
     }
 
     public DHTSensor(int dataPinNumber, DHTSensorType type) {

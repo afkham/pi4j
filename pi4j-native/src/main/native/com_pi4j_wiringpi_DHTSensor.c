@@ -82,7 +82,8 @@ int readDHT(int type, int pin) {
   }
 
   // read data!
-  for (int i=0; i< MAXTIMINGS; i++) {
+  int i = 0;
+  for (i=0; i< MAXTIMINGS; i++) {
     counter = 0;
     while ( bcm2835_gpio_lev(pin) == laststate) {
         counter++;
