@@ -12,7 +12,7 @@ extern "C" {
  * Method:    readSensor
  * Signature: (II)[F
  */
-JNIEXPORT jfloatArray JNICALL Java_com_pi4j_component_dht_DHTSensor_readSensor
+JNIEXPORT jint JNICALL Java_com_pi4j_component_dht_DHTSensor_readSensor
   (JNIEnv *, jclass, jint, jint);
 
 #ifdef __cplusplus

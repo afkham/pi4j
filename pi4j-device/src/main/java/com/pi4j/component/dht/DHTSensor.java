@@ -44,28 +44,28 @@ public class DHTSensor {
         NativeLibraryLoader.load("pi4j", "libpi4j.so");
     }
 
-    public DHTSensor(int dataPinNumber, DHTSensorType type) {
+    /*public DHTSensor(int dataPinNumber, DHTSensorType type) {
         this.dataPinNumber = dataPinNumber;
         this.type = type;
-    }
+    }*/
 
-    private native float[] readSensor(int sensorType, int dataPinNumber);
+    public static native int readSensor(int sensorType, int dataPinNumber);
 
 //    public float readTemperature(TemperatureScale scale) {
-    public float readTemperature() {
+    /*public float readTemperature() {
 
 //        if (scale.equals(TemperatureScale.FARENHEIT)) {
 //            return nativeReadTemperature(true, type.getType(), dataPinNumber);
 //        } else {
-            return readSensor(type.getType(), dataPinNumber)[0];
+            return readSensor(type.getType(), dataPinNumber);
 //        }
     }
 
     private float convertCtoF(float c) {
         return c * 9 / 5 + 32;
-    }
-
+    }*/
+/*
     public float readHumidity() {
         return readSensor(type.getType(), dataPinNumber)[1];
-    }
+    }*/
 }
