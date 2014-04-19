@@ -129,24 +129,27 @@ void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
   }
 #endif
 
+  #ifdef DEBUG
   printf("Data (%d): 0x%x 0x%x 0x%x 0x%x 0x%x\n", j, data[0], data[1], data[2], data[3], data[4]);
+  #endif
 
   if ((j >= 39) &&
       (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) ) {
-      float f = -1, h = -1;
-     // yay!
-     if (type == DHT11)
+     int f = -1;
+     int h = -1;
+
+     if (type == DHT11) {
         f = data[2];
         h = data[0];
-        printf("Temp = %d *C, Hum = %d \%\n", data[2], data[0]);
-     if (type == DHT22) {
+        printf("Temp = %d *C, Hum = %d \n", data[2], data[0]);
+     } else if (type == DHT22) {
         h = data[0] * 256 + data[1];
         h /= 10;
 
         f = (data[2] & 0x7F)* 256 + data[3];
         f /= 10.0;
         if (data[2] & 0x80)  f *= -1;
-        printf("Temp =  %.1f *C, Hum = %.1f \%\n", f, h);
+        printf("Temp =  %d *C, Hum = %d \n", f, h);
       }
 
      setField(env, thisObj, "temperature", f);
