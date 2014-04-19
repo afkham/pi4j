@@ -39,6 +39,7 @@ public class DHTSensorExample {
 
 
         while (true) {
+            System.out.println("-----------------------------");
             dhtSensor.read();
             System.out.println("temperature C= " + dhtSensor.getTemperature(false));
             System.out.println("temperature F= " + dhtSensor.getTemperature(true));
