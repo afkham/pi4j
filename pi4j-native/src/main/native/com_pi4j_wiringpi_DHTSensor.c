@@ -72,9 +72,9 @@ JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
 }
 
 int bits[250], data[100];
-int bitidx = 0;
 
 int * readDHTRaw(int type, int pin) {
+  int bitidx = 0;
   int counter = 0;
   int laststate = HIGH;
   int j=0;
@@ -109,7 +109,6 @@ int * readDHTRaw(int type, int pin) {
     laststate = bcm2835_gpio_lev(pin);
     if (counter == 1000) break;
     bits[bitidx++] = counter;
-
     if ((i>3) && (i%2 == 0)) {
       // shove each bit into the storage bytes
       data[j/8] <<= 1;
@@ -149,8 +148,8 @@ int * readDHTRaw(int type, int pin) {
         printf("Temp =  %d *C, Hum = %d \n", f, h);
       }
       static int result[2];
-      result[0] = f;
-      result[1] = h;
+      result[0] = 23;
+      result[1] = 42;
       return result;
  } else {
      usleep(500000);  // 500 ms
