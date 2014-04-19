@@ -148,8 +148,8 @@ int * readDHTRaw(int type, int pin) {
         printf("Temp =  %d *C, Hum = %d \n", f, h);
       }
       static int result[2];
-      result[0] = 23;
-      result[1] = 42;
+      result[0] = f;
+      result[1] = h;
       return result;
  } else {
      usleep(500000);  // 500 ms
