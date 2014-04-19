@@ -11,40 +11,14 @@ CC	= gcc
 INCLUDE	= -I. -I/$(JAVA_HOME)/include -I/usr/local/include -I. -I/$(JAVA_HOME)/include/linux -I/usr/local/include/linux
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe $(LIBS) 
 
-LIBS    = -L/usr/local/lib /usr/local/lib/libwiringPi.a
+LIBS    = -L/usr/local/lib /usr/local/lib/libwiringPi.a /usr/local/lib/libbcm2835.a
 
 # Should not alter anything below this line
 ###############################################################################
 
-SRC	=   com_pi4j_jni_I2C.c            \
-	    com_pi4j_jni_Serial.c         \
-	    com_pi4j_wiringpi_Gpio.c      \
-        com_pi4j_wiringpi_Serial.c    \
-        com_pi4j_wiringpi_Lcd.c       \
-        com_pi4j_wiringpi_Shift.c     \
-        com_pi4j_wiringpi_SoftPwm.c   \
-        com_pi4j_wiringpi_Spi.c       \
-        com_pi4j_wiringpi_Gertboard.c \
-        com_pi4j_wiringpi_Nes.c       \
-        com_pi4j_wiringpi_GpioPin.c   \
-        com_pi4j_wiringpi_GpioUtil.c  \
-        com_pi4j_wiringpi_GpioInterrupt.c \
-        com_pi4j_wiringpi_DHTSensor.c
+SRC	=   com_pi4j_wiringpi_DHTSensor.c
 
-OBJ	=   com_pi4j_jni_I2C.o            \
-	    com_pi4j_jni_Serial.o         \
-	    com_pi4j_wiringpi_Gpio.o      \
-        com_pi4j_wiringpi_Serial.o    \
-        com_pi4j_wiringpi_Lcd.o       \
-        com_pi4j_wiringpi_Shift.o     \
-        com_pi4j_wiringpi_SoftPwm.o   \
-        com_pi4j_wiringpi_Spi.o       \
-        com_pi4j_wiringpi_Gertboard.o \
-        com_pi4j_wiringpi_Nes.o       \
-        com_pi4j_wiringpi_GpioPin.o   \
-        com_pi4j_wiringpi_GpioUtil.o  \
-        com_pi4j_wiringpi_GpioInterrupt.o \
-        com_pi4j_wiringpi_DHTSensor.o
+OBJ	=   com_pi4j_wiringpi_DHTSensor.o
 
 all:		$(TARGET)
 
@@ -81,17 +55,4 @@ uninstall:
 
 
 # DO NOT DELETE
-com_pi4j_jni_I2C.o: com_pi4j_jni_I2C.h
-com_pi4j_jni_Serial.o: com_pi4j_jni_Serial.h
-com_pi4j_wiringpi_Gpio.o: com_pi4j_wiringpi_Gpio.h  
-com_pi4j_wiringpi_GpioPin.o: com_pi4j_wiringpi_GpioPin.h
-com_pi4j_wiringpi_GpioUtil.o: com_pi4j_wiringpi_GpioUtil.h
-com_pi4j_wiringpi_GpioInterrupt.o: com_pi4j_wiringpi_GpioInterrupt.h
-com_pi4j_wiringpi_Serial.o: com_pi4j_wiringpi_Serial.h
-com_pi4j_wiringpi_Lcd.o: com_pi4j_wiringpi_Lcd.h
-com_pi4j_wiringpi_Shift.o: com_pi4j_wiringpi_Shift.h
-com_pi4j_wiringpi_SoftPwm.o: com_pi4j_wiringpi_SoftPwm.h
-com_pi4j_wiringpi_Spi.o: com_pi4j_wiringpi_Spi.h
-com_pi4j_wiringpi_Gertboard.o: com_pi4j_wiringpi_Gertboard.h
-com_pi4j_wiringpi_Nes.o: com_pi4j_wiringpi_Nes.h
 com_pi4j_wiringpi_DHTSensor.o: com_pi4j_wiringpi_DHTSensor.h

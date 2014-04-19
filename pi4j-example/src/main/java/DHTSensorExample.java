@@ -26,6 +26,7 @@
  */
 
 import com.pi4j.wiringpi.DHTSensor;
+import com.pi4j.wiringpi.DHTSensorType;
 
 /**
  * Created by azeez on 4/17/14.
@@ -34,17 +35,17 @@ public class DHTSensorExample {
     public static void main(String[] args) {
         System.out.println("<--Pi4J--> DHT11 Sensor Example ... started.");
 
-//        DHTSensor dhtSensor = new DHTSensor(24, DHTSensorType.DHT11);
+        DHTSensor dhtSensor = new DHTSensor(DHTSensorType.DHT11, 27);
+
 
         while (true) {
-            float temperature = DHTSensor.readSensor(11, 24);
-//            float humidity = dhtSensor.readHumidity();
-
-            System.out.println("temperature = " + temperature);
-//            System.out.println("humidity = " + humidity);
+            dhtSensor.read();
+            System.out.println("temperature C= " + dhtSensor.getTemperature(false));
+            System.out.println("temperature F= " + dhtSensor.getTemperature(true));
+            System.out.println("humidity = " + dhtSensor.getHumidity());
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(10000);
             } catch (InterruptedException ignored) {
             }
         }

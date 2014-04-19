@@ -2,7 +2,7 @@
 #include <jni.h>
 /* Header for class com_pi4j_component_dht_DHTSensor */
 
-#ifndef _Included_com_pi4j_component_dht_DHTSensor
+#ifndef _Included_com_pi4j_wiringpi_DHTSensor
 #define _Included_com_pi4j_component_dht_DHTSensor
 #ifdef __cplusplus
 extern "C" {
@@ -12,8 +12,8 @@ extern "C" {
  * Method:    readSensor
  * Signature: (II)[F
  */
-JNIEXPORT jint JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
-  (JNIEnv *, jclass, jint, jint);
+JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
+  (JNIEnv *, jobject, jint, jint);
 
 #ifdef __cplusplus
 }

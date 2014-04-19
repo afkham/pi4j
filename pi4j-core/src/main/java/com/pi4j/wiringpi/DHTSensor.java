@@ -36,36 +36,45 @@ import com.pi4j.util.NativeLibraryLoader;
  */
 public class DHTSensor {
 
+    private DHTSensorType type;
     private int dataPinNumber;
-//    private DHTSensorType type;
+    private int temperature;
+    private int humidity;
+    private boolean readCalled;
+
+    public DHTSensor(DHTSensorType type, int dataPinNumber) {
+        this.type = type;
+        this.dataPinNumber = dataPinNumber;
+    }
 
     static {
         // Load the platform library
-        NativeLibraryLoader.load("pi4j", "libpi4j.so");
+//        NativeLibraryLoader.load("pi4j", "libpi4j.so");
+        System.loadLibrary("pi4j");
     }
 
-    /*public DHTSensor(int dataPinNumber, DHTSensorType type) {
-        this.dataPinNumber = dataPinNumber;
-        this.type = type;
-    }*/
+    private native void readSensor(int sensorType, int dataPinNumber);
 
-    public static native int readSensor(int sensorType, int dataPinNumber);
+    public void read() {
+        readSensor(type.getType(), dataPinNumber);
+        readCalled = true;
+    }
 
-//    public float readTemperature(TemperatureScale scale) {
-    /*public float readTemperature() {
-
-//        if (scale.equals(TemperatureScale.FARENHEIT)) {
-//            return nativeReadTemperature(true, type.getType(), dataPinNumber);
-//        } else {
-            return readSensor(type.getType(), dataPinNumber);
-//        }
+    public float getTemperature(boolean isFahrenheit) {
+        if (!readCalled) throw new IllegalStateException("read not called");
+        if (isFahrenheit) {
+            return  convertCtoF(temperature);
+        } else {
+            return temperature;
+        }
     }
 
     private float convertCtoF(float c) {
         return c * 9 / 5 + 32;
-    }*/
-/*
-    public float readHumidity() {
-        return readSensor(type.getType(), dataPinNumber)[1];
-    }*/
+    }
+
+    public int getHumidity() {
+        if (!readCalled) throw new IllegalStateException("read not called");
+        return humidity;
+    }
 }

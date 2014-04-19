@@ -28,38 +28,55 @@
 #define DHT22 22
 #define AM2302 22
 
-int readDHT(int type, int pin);
+void readDHT(JNIEnv *env, jobject thisObj, int type, int pin);
+void setField(JNIEnv *env, jobject thisObj, const char *name , int fieldValue);
 
-JNIEXPORT jint JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
-  (JNIEnv *env, jclass class, jint sensorType, jint dataPinNumber)
+JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
+  (JNIEnv *env, jobject thisObj, jint sensorType, jint dataPinNumber)
 {
      if (!bcm2835_init())
-         return 1;
+         return;
      int type = 0;
-     if ((int)sensorType == 11) type = DHT11;
-     if ((int)sensorType == 22) type = DHT22;
-     if ((int)sensorType == 2302) type = AM2302;
+     if ((long)sensorType == 11) {
+        type = DHT11;
+        #ifdef DEBUG
+        printf("DHT sensor type: DHT11\n");
+        #endif
+     }
+     if ((long)sensorType == 22){
+        type = DHT22;
+        #ifdef DEBUG
+        printf("DHT sensor type: DHT22\n");
+        #endif
+     }
+     if ((long)sensorType == 2302) {
+        type = AM2302;
+        #ifdef DEBUG
+        printf("DHT sensor type: AM2302\n");
+        #endif
+    }
      if (type == 0) {
           printf("Select 11, 22, 2302 as type!\n");
-          return 3;
+          return;
      }
 
-      int dhtpin = (int) dataPinNumber;
+      long dhtpin = (long) dataPinNumber;
 
       if (dhtpin <= 0) {
             printf("Please select a valid GPIO pin #\n");
-            return 3;
+            return;
       }
 
-      printf("Using pin #%d\n", dhtpin);
-      return readDHT(type, dhtpin);
-      // return 0;
+      #ifdef DEBUG
+      printf("Using pin #%ul\n", dhtpin);
+      #endif
+      readDHT(env, thisObj, type, dhtpin);
 }
 
 int bits[250], data[100];
 int bitidx = 0;
 
-int readDHT(int type, int pin) {
+void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
   int counter = 0;
   int laststate = HIGH;
   int j=0;
@@ -116,11 +133,13 @@ int readDHT(int type, int pin) {
 
   if ((j >= 39) &&
       (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) ) {
+      float f = -1, h = -1;
      // yay!
      if (type == DHT11)
+        f = data[2];
+        h = data[0];
         printf("Temp = %d *C, Hum = %d \%\n", data[2], data[0]);
      if (type == DHT22) {
-        float f, h;
         h = data[0] * 256 + data[1];
         h /= 10;
 
@@ -128,9 +147,18 @@ int readDHT(int type, int pin) {
         f /= 10.0;
         if (data[2] & 0x80)  f *= -1;
         printf("Temp =  %.1f *C, Hum = %.1f \%\n", f, h);
-    }
-    return 1;
- }
+      }
 
-  return 0;
+     setField(env, thisObj, "temperature", f);
+     setField(env, thisObj, "humidity", h);
+ }
+}
+
+void setField(JNIEnv *env, jobject thisObj, const char *name , int fieldValue){
+      jclass thisClass = (*env)->GetObjectClass(env, thisObj);
+      jfieldID fid = (*env)->GetFieldID(env, thisClass, name, "I");
+      if (NULL == fid) return;
+
+      // Change the variable
+      (*env)->SetIntField(env, thisObj, fid, fieldValue);
 }
