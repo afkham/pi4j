@@ -42,20 +42,17 @@ JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
         #ifdef DEBUG
         printf("DHT sensor type: DHT11\n");
         #endif
-     }
-     if ((long)sensorType == 22){
+     } else if ((long)sensorType == 22){
         type = DHT22;
         #ifdef DEBUG
         printf("DHT sensor type: DHT22\n");
         #endif
-     }
-     if ((long)sensorType == 2302) {
+     } else if ((long)sensorType == 2302) {
         type = AM2302;
         #ifdef DEBUG
         printf("DHT sensor type: AM2302\n");
         #endif
-    }
-     if (type == 0) {
+     } else {
           printf("Select 11, 22, 2302 as type!\n");
           return;
      }
@@ -154,6 +151,9 @@ void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
 
      setField(env, thisObj, "temperature", f);
      setField(env, thisObj, "humidity", h);
+ } else {
+     usleep(500000);  // 500 ms
+     readDHT(env, thisObj, type, pin);
  }
 }
 
