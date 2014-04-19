@@ -28,6 +28,7 @@
 #define DHT22 22
 #define AM2302 22
 
+int * readDHTRaw(int type, int pin);
 void readDHT(JNIEnv *env, jobject thisObj, int type, int pin);
 void setField(JNIEnv *env, jobject thisObj, const char *name , int fieldValue);
 
@@ -73,7 +74,7 @@ JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
 int bits[250], data[100];
 int bitidx = 0;
 
-void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
+int * readDHTRaw(int type, int pin) {
   int counter = 0;
   int laststate = HIGH;
   int j=0;
@@ -142,20 +143,27 @@ void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
      } else if (type == DHT22) {
         h = data[0] * 256 + data[1];
         h /= 10;
-
         f = (data[2] & 0x7F)* 256 + data[3];
         f /= 10.0;
         if (data[2] & 0x80)  f *= -1;
         printf("Temp =  %d *C, Hum = %d \n", f, h);
       }
-
-     setField(env, thisObj, "temperature", f);
-     setField(env, thisObj, "humidity", h);
+      static int result[2];
+      result[0] = f;
+      result[1] = h;
+      return result;
  } else {
      usleep(500000);  // 500 ms
-     readDHT(env, thisObj, type, pin);
+     readDHTRaw(type, pin);
  }
 }
+
+void readDHT(JNIEnv *env, jobject thisObj, int type, int pin) {
+     int *p = readDHTRaw(type, pin);
+     setField(env, thisObj, "temperature", *(p));
+     setField(env, thisObj, "humidity", *(p+1));
+}
+
 
 void setField(JNIEnv *env, jobject thisObj, const char *name , int fieldValue){
       jclass thisClass = (*env)->GetObjectClass(env, thisObj);

@@ -14,6 +14,7 @@ extern "C" {
  */
 JNIEXPORT void JNICALL Java_com_pi4j_wiringpi_DHTSensor_readSensor
   (JNIEnv *, jobject, jint, jint);
+int * readDHTRaw(int, int );
 
 #ifdef __cplusplus
 }
