@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.pi4j</groupId>
 		<artifactId>pi4j-parent</artifactId>
-		<version>0.0.5</version>
+		<version>0.0.5.wso2</version>
 	</parent>
 
 	<!-- PROJECT DEPENDENCIES -->
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-native</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.5</version>
 			<type>so</type>
 			<classifier>hard-float</classifier>
 			<scope>compile</scope>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-native</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.5</version>
 			<type>so</type>
 			<classifier>soft-float</classifier>
 			<scope>compile</scope>
@@ -100,7 +100,7 @@
 								<artifactItem>
 									<groupId>com.pi4j</groupId>
 									<artifactId>pi4j-native</artifactId>
-									<version>${project.version}</version>
+									<version>0.0.5</version>
 									<type>so</type>
 									<classifier>hard-float</classifier>
 									<overWrite>true</overWrite>
@@ -110,7 +110,7 @@
 								<artifactItem>
 									<groupId>com.pi4j</groupId>
 									<artifactId>pi4j-native</artifactId>
-									<version>${project.version}</version>
+									<version>0.0.5</version>
 									<type>so</type>
 									<classifier>soft-float</classifier>
 									<overWrite>true</overWrite>
